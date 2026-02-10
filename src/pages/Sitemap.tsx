@@ -11,7 +11,7 @@ const sitemapLinks = [
       { name: 'About Us', href: '/about' },
       { name: 'Who We Are', href: '/whoweare' },
       { name: 'Contact Us', href: '/contact' },
-    ] 
+    ]
   },
   {
     category: 'Services',
@@ -47,6 +47,7 @@ const sitemapLinks = [
       { name: 'Our Team', href: '/about' },
       { name: 'Specialization', href: '/specialization' },
       { name: 'Training Program', href: '/trainingprogram' },
+      { name: 'Success Stories', href: '/success-stories' },
       { name: 'Manage Hospitality', href: '/manage-hospitality' },
     ]
   }

@@ -9,17 +9,20 @@ const quickLinks = [
   { name: 'Testimonials', href: '/#testimonials' },
   { name: 'Our Clients', href: '/#clients' },
   { name: 'Blogs', href: '/blogs' },
+  { name: 'Success Stories', href: '/success-stories' },
   { name: 'Contact', href: '/contact' },
   { name: 'Privacy Policy', href: '/privacy' },
   { name: 'Sitemap', href: '/sitemap' },
   { name: 'Manage Hospitality', href: '/manage-hospitality' },
 ];
 
+
+// TODO: Update these with your actual social media URLs
 const socialLinks = [
-  { name: 'Facebook', href: 'https://www.facebook.com' },
-  { name: 'Twitter', href: 'https://twitter.com' },
-  { name: 'Instagram', href: 'https://www.instagram.com' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com' },
+  { name: 'Facebook', href: 'https://www.facebook.com/pcubeconsulting' },
+  { name: 'Twitter', href: 'https://twitter.com/pcubeconsulting' },
+  { name: 'Instagram', href: 'https://www.instagram.com/pcubeconsulting' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/pcubeconsulting' },
 ];
 
 const countriesWeServe = [

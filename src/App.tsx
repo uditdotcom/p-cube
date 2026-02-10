@@ -29,6 +29,7 @@ import VisaProcessing from "./components/layout/VisaProcessing";
 import DocumentationSupport from "./components/home/DocumentationSupport";
 import ImmigrationConsulting from "./components/home/ImmigrationConsulting";
 import ManageHospitality from "./pages/ManageHospitality";
+import SuccessStories from "./pages/SuccessStories";
 import Sitemap from "./pages/Sitemap";
 import Blogs from "./pages/Blogs";
 import Privacy from "./pages/Privacy";
@@ -67,6 +68,7 @@ const App = () => (
           <Route path="/documentationsupport" element={<DocumentationSupport />} />
           <Route path="/immigrationconsulting" element={<ImmigrationConsulting />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/success-stories" element={<SuccessStories />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/sitemap" element={<Sitemap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
