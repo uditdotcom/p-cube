@@ -1,83 +1,17 @@
 import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { CheckCircle, Quote, Star, Award, MapPin, Calendar } from 'lucide-react';
+import { CheckCircle, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
-const successStories = [
-    {
-        id: 1,
-        name: 'Rajesh Kumar',
-        role: 'Chef',
-        country: 'Dubai, UAE',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh',
-        story: 'I got my work visa approved in just 45 days! P Cube Consulting handled everything from documentation to interview preparation. Now I\'m working at a 5-star hotel in Dubai.',
-        visaType: 'Work Visa',
-        processingTime: '45 days',
-        rating: 5,
-        date: 'January 2026',
-    },
-    {
-        id: 2,
-        name: 'Priya Sharma',
-        role: 'Hotel Manager',
-        country: 'London, UK',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya',
-        story: 'The team was incredibly supportive throughout my visa process. They guided me at every step and I received my UK work permit within 2 months. Highly recommended!',
-        visaType: 'Work Permit',
-        processingTime: '60 days',
-        rating: 5,
-        date: 'December 2025',
-    },
-    {
-        id: 3,
-        name: 'Amit Patel',
-        role: 'Restaurant Supervisor',
-        country: 'Singapore',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Amit',
-        story: 'P Cube made my dream come true! From finding the right job to getting my visa approved, they were with me every step. I\'m now settled in Singapore with my family.',
-        visaType: 'Employment Pass',
-        processingTime: '30 days',
-        rating: 5,
-        date: 'November 2025',
-    },
-    {
-        id: 4,
-        name: 'Sneha Reddy',
-        role: 'Front Office Executive',
-        country: 'Australia',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha',
-        story: 'The visa process seemed daunting, but P Cube simplified everything. Their expertise in Australian immigration helped me get my visa in record time!',
-        visaType: 'Skilled Worker Visa',
-        processingTime: '90 days',
-        rating: 5,
-        date: 'October 2025',
-    },
-    {
-        id: 5,
-        name: 'Vikram Singh',
-        role: 'Executive Chef',
-        country: 'Canada',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram',
-        story: 'Professional, efficient, and caring - that\'s P Cube Consulting! They helped me secure a position at a top restaurant in Toronto and handled all visa formalities.',
-        visaType: 'Work Permit',
-        processingTime: '75 days',
-        rating: 5,
-        date: 'September 2025',
-    },
-    {
-        id: 6,
-        name: 'Anita Desai',
-        role: 'Housekeeping Manager',
-        country: 'Qatar',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anita',
-        story: 'I was skeptical at first, but P Cube exceeded all my expectations. Quick visa approval, excellent job placement, and ongoing support even after arrival!',
-        visaType: 'Work Visa',
-        processingTime: '40 days',
-        rating: 5,
-        date: 'August 2025',
-    },
-];
+// Dynamically import all images from the success stories folder
+const modules = import.meta.glob('@/assets/success/*.{jpg,jpeg,png,webp}', { eager: true });
+
+// Convert the imported modules into the successStories array
+export const successStories = Object.entries(modules).map(([path, mod]: [string, any], index) => ({
+    id: index + 1,
+    image: mod.default,
+}));
 
 const SuccessStories = () => {
     return (
@@ -129,7 +63,16 @@ const SuccessStories = () => {
                 {/* Success Stories Grid */}
                 <section className="py-20">
                     <div className="container">
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-bold text-[#0a192f] mb-4">
+                                Our Success Stories
+                            </h2>
+                            <p className="text-gray-600 max-w-2xl mx-auto">
+                                Real achievements from real people who trusted P Cube Consulting with their dreams
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                             {successStories.map((story, index) => (
                                 <motion.div
                                     key={story.id}
@@ -137,60 +80,31 @@ const SuccessStories = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                                    className="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
                                 >
-                                    {/* Header */}
-                                    <div className="bg-gradient-to-r from-[#148d8d] to-[#0a192f] p-6 text-white">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <img
-                                                src={story.image}
-                                                alt={story.name}
-                                                className="w-16 h-16 rounded-full border-4 border-white/20"
-                                            />
-                                            <div>
-                                                <h3 className="font-bold text-lg">{story.name}</h3>
-                                                <p className="text-sm text-gray-200">{story.role}</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-sm">
-                                            <MapPin className="w-4 h-4" />
-                                            <span>{story.country}</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="p-6">
-                                        <Quote className="w-8 h-8 text-[#d4af37] mb-4" />
-                                        <p className="text-gray-700 leading-relaxed mb-6">
-                                            "{story.story}"
-                                        </p>
-
-                                        {/* Details */}
-                                        <div className="space-y-3 mb-6">
-                                            <div className="flex items-center justify-between text-sm">
-                                                <span className="text-gray-600">Visa Type:</span>
-                                                <span className="font-semibold text-[#0a192f]">{story.visaType}</span>
-                                            </div>
-                                            <div className="flex items-center justify-between text-sm">
-                                                <span className="text-gray-600">Processing Time:</span>
-                                                <span className="font-semibold text-[#148d8d]">{story.processingTime}</span>
-                                            </div>
-                                            <div className="flex items-center justify-between text-sm">
-                                                <span className="text-gray-600">Date:</span>
-                                                <span className="font-semibold">{story.date}</span>
-                                            </div>
-                                        </div>
-
-                                        {/* Rating */}
-                                        <div className="flex gap-1 pt-4 border-t">
-                                            {[...Array(story.rating)].map((_, i) => (
-                                                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                                            ))}
-                                        </div>
+                                    {/* Image */}
+                                    <div className="relative h-auto overflow-hidden">
+                                        <img
+                                            src={story.image}
+                                            alt={`Success Story ${story.id}`}
+                                            className="w-full h-auto"
+                                        />
                                     </div>
                                 </motion.div>
                             ))}
                         </div>
+
+                        {/* Info Note */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            className="mt-12 text-center"
+                        >
+                            <p className="text-gray-500 italic">
+                                More success stories coming soon...
+                            </p>
+                        </motion.div>
                     </div>
                 </section>
 
