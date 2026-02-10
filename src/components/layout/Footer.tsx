@@ -21,7 +21,7 @@ const quickLinks = [
 const socialLinks = [
   { name: 'Facebook', href: 'https://www.facebook.com/pcubeconsulting' },
   { name: 'Twitter', href: 'https://twitter.com/pcubeconsulting' },
-  { name: 'Instagram', href: 'https://www.instagram.com/pcubeconsulting' },
+  { name: 'Instagram', href: 'https://www.instagram.com/pcubeconsulting555' },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/pcubeconsulting' },
 ];
 
