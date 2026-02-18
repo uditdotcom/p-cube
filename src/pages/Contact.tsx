@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Phone, Mail, MapPin, Clock, Send, Facebook, Linkedin, Instagram, Youtube
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
@@ -43,15 +43,33 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    toast({
-      title: "Message Sent Successfully!",
-      description: "We'll get back to you within 24-48 hours.",
-    });
-    
-    setIsSubmitting(false);
+
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+
+      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "We'll get back to you within 24-48 hours.",
+        });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,7 +90,7 @@ const Contact = () => {
               Get in <span className="text-gold">Touch</span>
             </h1>
             <p className="text-xl text-primary-foreground/70">
-              Have questions about our services? Looking for career opportunities or need recruitment support? 
+              Have questions about our services? Looking for career opportunities or need recruitment support?
               We're here to help.
             </p>
           </motion.div>
@@ -119,27 +137,32 @@ const Contact = () => {
                 title="We'd Love to Hear from You"
                 centered={false}
               />
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* FormSubmit Configuration */}
+                <input type="hidden" name="_subject" value="New Contact Form Submission - P Cube Consulting" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Your Name *</Label>
-                    <Input id="name" placeholder="Full name" required />
+                    <Input id="name" name="name" placeholder="Full name" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="your@email.com" required />
+                    <Input id="email" name="email" type="email" placeholder="your@email.com" required />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" placeholder="+91 98765 43210" />
+                    <Input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="inquiryType">Inquiry Type *</Label>
-                    <Select>
+                    <Select name="inquiry_type" required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
@@ -154,22 +177,23 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject *</Label>
-                  <Input id="subject" placeholder="How can we help?" required />
+                  <Input id="subject" name="subject" placeholder="How can we help?" required />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="message">Message *</Label>
-                  <Textarea 
-                    id="message" 
+                  <Textarea
+                    id="message"
+                    name="message"
                     placeholder="Tell us more about your inquiry..."
                     rows={5}
                     required
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="w-full bg-gradient-primary hover:opacity-90"
                   disabled={isSubmitting}
                 >
@@ -197,10 +221,10 @@ const Contact = () => {
                 title="Visit Us"
                 centered={false}
               />
-              
+
               <div className="space-y-6">
                 {offices.map((office, index) => (
-                  <div 
+                  <div
                     key={office.city}
                     className="bg-card rounded-xl p-6 shadow-md border border-border"
                   >

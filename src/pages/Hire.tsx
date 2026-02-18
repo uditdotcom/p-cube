@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Building2, Users, Globe, CheckCircle2, ArrowRight, Shield, Clock, 
+import {
+  Building2, Users, Globe, CheckCircle2, ArrowRight, Shield, Clock,
   Award, Briefcase, User, Mail, Phone, FileText
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
@@ -80,15 +80,33 @@ const Hire = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    toast({
-      title: "Inquiry Submitted Successfully!",
-      description: "Our recruitment team will contact you within 24 hours.",
-    });
-    
-    setIsSubmitting(false);
+
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+
+      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Inquiry Submitted Successfully!",
+          description: "Our recruitment team will contact you within 24 hours.",
+        });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -112,7 +130,7 @@ const Hire = () => {
               Hire Exceptional <span className="text-gold">Hotel Talent</span>
             </h1>
             <p className="text-xl text-primary-foreground/70 leading-relaxed mb-8">
-              Partner with P Cube Consulting to access a vast pool of pre-screened, skilled 
+              Partner with P Cube Consulting to access a vast pool of pre-screened, skilled
               hotel professionals ready to elevate your guest experience.
             </p>
             <div className="flex flex-wrap gap-8 text-primary-foreground/80">
@@ -218,7 +236,7 @@ const Hire = () => {
                 centered={false}
               />
               <p className="text-lg text-muted-foreground mb-8">
-                Fill out the form and our dedicated recruitment team will contact you within 
+                Fill out the form and our dedicated recruitment team will contact you within
                 24 hours to discuss your requirements and provide a customized staffing solution.
               </p>
               <div className="space-y-6">
@@ -251,15 +269,20 @@ const Hire = () => {
               onSubmit={handleSubmit}
               className="bg-card rounded-2xl p-8 shadow-lg border border-border"
             >
+              {/* FormSubmit Configuration */}
+              <input type="hidden" name="_subject" value="New Hiring Inquiry - P Cube Consulting" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
               <div className="grid gap-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="companyName">Company Name *</Label>
-                    <Input id="companyName" placeholder="Your company name" required />
+                    <Input id="companyName" name="company_name" placeholder="Your company name" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="companyType">Company Type *</Label>
-                    <Select>
+                    <Select name="company_type" required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
@@ -275,29 +298,29 @@ const Hire = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="contactName">Contact Person *</Label>
-                    <Input id="contactName" placeholder="Full name" required />
+                    <Input id="contactName" name="contact_name" placeholder="Full name" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="designation">Designation</Label>
-                    <Input id="designation" placeholder="Your role" />
+                    <Input id="designation" name="designation" placeholder="Your role" />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="your@company.com" required />
+                    <Input id="email" name="email" type="email" placeholder="your@company.com" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" type="tel" placeholder="+91 98765 43210" required />
+                    <Input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" required />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="hiringCategory">Hiring Category *</Label>
-                    <Select>
+                    <Select name="hiring_category" required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
@@ -310,22 +333,23 @@ const Hire = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="vacancies">Number of Vacancies</Label>
-                    <Input id="vacancies" type="number" placeholder="e.g., 10" />
+                    <Input id="vacancies" name="vacancies" type="number" placeholder="e.g., 10" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="requirements">Specific Requirements</Label>
-                  <Textarea 
-                    id="requirements" 
+                  <Textarea
+                    id="requirements"
+                    name="requirements"
                     placeholder="Describe the positions, qualifications, experience needed, location, etc..."
                     rows={4}
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="w-full bg-gradient-primary hover:opacity-90"
                   disabled={isSubmitting}
                 >

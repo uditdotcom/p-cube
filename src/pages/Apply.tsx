@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Upload, FileText, CheckCircle2, ArrowRight, User, Mail, Phone, 
+import {
+  Upload, FileText, CheckCircle2, ArrowRight, User, Mail, Phone,
   Briefcase, MapPin, GraduationCap, Globe, Calendar
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
@@ -119,31 +119,22 @@ const Apply = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    try {
-      const form = new FormData();
-      
-      // Add all form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && value !== '') {
-          form.append(key, value);
-        }
-      });
 
-      // Send to your PHP endpoint
-      const response = await fetch('https://pcubeconsulting.com/files/api/send-mail.php', {
+    try {
+      const form = new FormData(e.target as HTMLFormElement);
+
+      // Send to FormSubmit
+      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
         method: 'POST',
         body: form,
       });
 
-      const result = await response.json();
-
-      if (result.status === 'success') {
+      if (response.ok) {
         toast({
           title: "Application Submitted Successfully!",
           description: "Our team will review your profile and contact you shortly.",
         });
-        
+
         // Reset form
         setFormData({
           first_name: '',
@@ -162,18 +153,15 @@ const Apply = () => {
           message: '',
           resume: null,
         });
+        (e.target as HTMLFormElement).reset();
       } else {
-        toast({
-          title: "Submission Failed",
-          description: result.message || "Failed to submit application. Please try again.",
-          variant: "destructive",
-        });
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Error",
-        description: "An error occurred while submitting your application. Please try again.",
+        title: "Submission Failed",
+        description: "Please try again or contact us directly at admin@pcubeconsulting.com",
         variant: "destructive",
       });
     } finally {
@@ -199,7 +187,7 @@ const Apply = () => {
               Apply for Guest services <span className="text-gold">Opportunities</span>
             </h1>
             <p className="text-xl text-primary-foreground/70">
-              Submit your application and let us connect you with exciting career opportunities 
+              Submit your application and let us connect you with exciting career opportunities
               in hotels, resorts, cruise lines, and restaurants worldwide.
             </p>
           </motion.div>
@@ -247,6 +235,11 @@ const Apply = () => {
               onSubmit={handleSubmit}
               className="bg-card rounded-2xl p-8 md:p-12 shadow-lg border border-border"
             >
+              {/* FormSubmit Configuration */}
+              <input type="hidden" name="_subject" value="New Job Application - P Cube Consulting" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
               {/* Personal Information */}
               <div className="mb-10">
                 <h3 className="text-xl font-heading font-semibold text-foreground mb-6 flex items-center gap-2">
@@ -256,62 +249,68 @@ const Apply = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="first_name">First Name *</Label>
-                    <Input 
-                      id="first_name" 
-                      placeholder="Enter your first name" 
-                      required 
+                    <Input
+                      id="first_name"
+                      name="first_name"
+                      placeholder="Enter your first name"
+                      required
                       value={formData.first_name}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="last_name">Last Name *</Label>
-                    <Input 
-                      id="last_name" 
-                      placeholder="Enter your last name" 
-                      required 
+                    <Input
+                      id="last_name"
+                      name="last_name"
+                      placeholder="Enter your last name"
+                      required
                       value={formData.last_name}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your@email.com" 
-                      required 
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      required
                       value={formData.email}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number *</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="+91 98765 43210" 
-                      required 
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      required
                       value={formData.phone}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="dob">Date of Birth *</Label>
-                    <Input 
-                      id="dob" 
-                      type="date" 
-                      required 
+                    <Input
+                      id="dob"
+                      name="dob"
+                      type="date"
+                      required
                       value={formData.dob}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="nationality">Nationality *</Label>
-                    <Input 
-                      id="nationality" 
-                      placeholder="e.g., Indian" 
-                      required 
+                    <Input
+                      id="nationality"
+                      name="nationality"
+                      placeholder="e.g., Indian"
+                      required
                       value={formData.nationality}
                       onChange={handleInputChange}
                     />
@@ -328,7 +327,7 @@ const Apply = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="department">Department / Position *</Label>
-                    <Select value={formData.department} onValueChange={(value) => handleSelectChange('department', value)}>
+                    <Select name="department" value={formData.department} onValueChange={(value) => handleSelectChange('department', value)} required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select department" />
                       </SelectTrigger>
@@ -341,7 +340,7 @@ const Apply = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="experience">Experience Level *</Label>
-                    <Select value={formData.experience} onValueChange={(value) => handleSelectChange('experience', value)}>
+                    <Select name="experience" value={formData.experience} onValueChange={(value) => handleSelectChange('experience', value)} required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select experience" />
                       </SelectTrigger>
@@ -354,18 +353,20 @@ const Apply = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="current_role">Current Role / Title</Label>
-                    <Input 
-                      id="current_role" 
-                      placeholder="e.g., Sous Chef, Front Desk Executive" 
+                    <Input
+                      id="current_role"
+                      name="current_role"
+                      placeholder="e.g., Sous Chef, Front Desk Executive"
                       value={formData.current_role}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="current_employer">Current Employer</Label>
-                    <Input 
-                      id="current_employer" 
-                      placeholder="Current company name" 
+                    <Input
+                      id="current_employer"
+                      name="current_employer"
+                      placeholder="Current company name"
                       value={formData.current_employer}
                       onChange={handleInputChange}
                     />
@@ -382,7 +383,7 @@ const Apply = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="preferred_location">Preferred Location *</Label>
-                    <Select value={formData.preferred_location} onValueChange={(value) => handleSelectChange('preferred_location', value)}>
+                    <Select name="preferred_location" value={formData.preferred_location} onValueChange={(value) => handleSelectChange('preferred_location', value)} required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select preferred location" />
                       </SelectTrigger>
@@ -395,7 +396,7 @@ const Apply = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="availability">Availability to Join</Label>
-                    <Select value={formData.availability} onValueChange={(value) => handleSelectChange('availability', value)}>
+                    <Select name="availability" value={formData.availability} onValueChange={(value) => handleSelectChange('availability', value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="When can you join?" />
                       </SelectTrigger>
@@ -410,9 +411,10 @@ const Apply = () => {
                   </div>
                   <div className="space-y-2 md:col-span-2">
                     <Label htmlFor="expected_salary">Expected Salary (per month)</Label>
-                    <Input 
-                      id="expected_salary" 
-                      placeholder="e.g., ₹50,000 or $3,000" 
+                    <Input
+                      id="expected_salary"
+                      name="expected_salary"
+                      placeholder="e.g., ₹50,000 or $3,000"
                       value={formData.expected_salary}
                       onChange={handleInputChange}
                     />
@@ -434,10 +436,10 @@ const Apply = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Accepted formats: PDF, DOC, DOCX (Max 5MB)
                   </p>
-                  <Input 
-                    type="file" 
-                    accept=".pdf,.doc,.docx" 
-                    className="max-w-xs mx-auto" 
+                  <Input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    className="max-w-xs mx-auto"
                     onChange={handleFileChange}
                   />
                   {formData.resume && (
@@ -454,8 +456,9 @@ const Apply = () => {
                 </h3>
                 <div className="space-y-2">
                   <Label htmlFor="message">Tell us about yourself and your career goals</Label>
-                  <Textarea 
-                    id="message" 
+                  <Textarea
+                    id="message"
+                    name="message"
                     placeholder="Share any additional information that might help us find the right opportunity for you..."
                     rows={5}
                     value={formData.message}
@@ -466,9 +469,9 @@ const Apply = () => {
 
               {/* Submit Button */}
               <div className="text-center">
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="bg-gradient-primary hover:opacity-90 px-12"
                   disabled={isSubmitting}
                 >
