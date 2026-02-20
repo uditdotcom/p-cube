@@ -123,13 +123,19 @@ const Apply = () => {
     try {
       const form = new FormData(e.target as HTMLFormElement);
 
-      // Send to FormSubmit
-      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
+      // Web3Forms configuration
+      form.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string);
+      // The email will be sent to the email registered with this access key (uditgupta9990@gmail.com)
+
+      // Send to Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: form,
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         toast({
           title: "Application Submitted Successfully!",
           description: "Our team will review your profile and contact you shortly.",
@@ -155,7 +161,7 @@ const Apply = () => {
         });
         (e.target as HTMLFormElement).reset();
       } else {
-        throw new Error('Submission failed');
+        throw new Error(data.message || 'Submission failed');
       }
     } catch (error) {
       console.error('Error:', error);

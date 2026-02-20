@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Phone, Mail, MapPin, Clock, Send, Facebook, Linkedin, Instagram, Youtube
+  Phone, Mail, MapPin, Clock, Send, Facebook, Linkedin, Instagram, Youtube, ArrowRight
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SectionHeading } from '@/components/ui/section-heading';
@@ -47,19 +47,24 @@ const Contact = () => {
     try {
       const formData = new FormData(e.target as HTMLFormElement);
 
-      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
+      // Web3Forms configuration
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: formData,
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         toast({
           title: "Message Sent Successfully!",
           description: "We'll get back to you within 24-48 hours.",
         });
         (e.target as HTMLFormElement).reset();
       } else {
-        throw new Error('Submission failed');
+        throw new Error(data.message || 'Submission failed');
       }
     } catch (error) {
       toast({
@@ -276,16 +281,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="h-96 bg-muted relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <MapPin className="w-16 h-16 text-primary/20 mx-auto mb-4" />
-            <p className="text-muted-foreground">Map integration available</p>
-            <p className="text-sm text-muted-foreground">Mumbai, Maharashtra, India</p>
-          </div>
-        </div>
-      </section>
+
     </Layout>
   );
 };

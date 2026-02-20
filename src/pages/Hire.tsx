@@ -84,19 +84,24 @@ const Hire = () => {
     try {
       const formData = new FormData(e.target as HTMLFormElement);
 
-      const response = await fetch('https://formsubmit.co/admin@pcubeconsulting.com', {
+      // Web3Forms configuration
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: formData,
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         toast({
           title: "Inquiry Submitted Successfully!",
           description: "Our recruitment team will contact you within 24 hours.",
         });
         (e.target as HTMLFormElement).reset();
       } else {
-        throw new Error('Submission failed');
+        throw new Error(data.message || 'Submission failed');
       }
     } catch (error) {
       toast({

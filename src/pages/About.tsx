@@ -57,10 +57,10 @@ const About = () => {
               About Us
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground mb-6">
-              Building Hotel Careers, <span className="text-gold">Globally</span>
+              Building Careers <span className="text-gold">Globally</span>
             </h1>
             <p className="text-xl text-primary-foreground/70 leading-relaxed">
-              Since 2012, P Cube Consulting has been the trusted bridge between talented 
+              Since 2005, P Cube Consulting has been the trusted bridge between talented 
               hotel professionals and world-class employers across the globe.
             </p>
           </motion.div>

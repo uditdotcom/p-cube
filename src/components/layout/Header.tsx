@@ -78,26 +78,6 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm">
-      {/* 1. Elegant Top Bar */}
-      <div className="bg-[#0a192f] text-white py-2.5 hidden md:block">
-        <div className="container flex justify-between items-center text-[13px] font-medium tracking-wide">
-          <div className="flex items-center gap-8">
-            <a href="tel:+917042332911" className="flex items-center gap-2 hover:text-[#d4af37] transition-colors">
-              <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
-              +91 70423 32911
-            </a>
-            <a href="mailto:admin@pcubeconsulting.com" className="flex items-center gap-2 hover:text-[#d4af37] transition-colors">
-              <Mail className="w-3.5 h-3.5 text-[#d4af37]" />
-              admin@pcubeconsulting.com
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="uppercase text-[11px] opacity-80 letter-spacing-1 text-[#d4af37]">Global Recruitment Specialists
-            </span>
-          </div>
-        </div>
-      </div>
 
       {/* 2. Main Navigation Area */}
       <nav className="container flex items-center justify-between py-4">
@@ -206,9 +186,6 @@ export function Header() {
 
         {/* CTA Group */}
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant="ghost" asChild className="text-gray-600 hover:text-[#148d8d] hover:bg-[#148d8d]/5 rounded-full px-6">
-            <Link to="/apply">Job Search</Link>
-          </Button>
           <Button asChild className="bg-gradient-to-r from-[#d4af37] to-[#b8952b] text-white rounded-full px-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
             <Link to="/hire">Hire Talent</Link>
           </Button>
@@ -269,9 +246,6 @@ export function Header() {
               </div>
             ))}
             <div className="pt-4 flex flex-col gap-2">
-              <Button asChild variant="outline" className="w-full border-primary text-primary">
-                <Link to="/apply" onClick={() => setMobileMenuOpen(false)}>Apply for Jobs</Link>
-              </Button>
               <Button asChild className="w-full bg-gradient-gold">
                 <Link to="/hire" onClick={() => setMobileMenuOpen(false)}>Hire Talent</Link>
               </Button>
