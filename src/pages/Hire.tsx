@@ -84,24 +84,23 @@ const Hire = () => {
     try {
       const formData = new FormData(e.target as HTMLFormElement);
 
-      // Web3Forms configuration
-      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string);
-
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formspree.io/f/xnjbloel', {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
         body: formData,
       });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.ok) {
         toast({
           title: "Inquiry Submitted Successfully!",
           description: "Our recruitment team will contact you within 24 hours.",
         });
         (e.target as HTMLFormElement).reset();
       } else {
-        throw new Error(data.message || 'Submission failed');
+        const data = await response.json();
+        throw new Error(data.error || 'Submission failed');
       }
     } catch (error) {
       toast({
