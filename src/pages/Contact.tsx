@@ -18,13 +18,7 @@ const offices = [
     address: 'Ats Bouquet Tower-A sector -132 Noida, Uttar Pradesh 201304, India',
     phone: '+91 70423 32911',
     email: 'admin@pcubeconsulting.com',
-  },
-  {
-    city: 'Delhi',
-    address: 'Delhi- 747 Pitampura Pura Delhi-110034, India',
-    phone: '+91 70423 32911',
-    email: 'admin@pcubeconsulting.com',
-  },
+  }
 ];
 
 const inquiryTypes = [
