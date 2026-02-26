@@ -38,7 +38,7 @@ const features = [
 
 export function WhyChooseSection() {
   return (
-    <section className="py-20 md:py-28 bg-navy text-primary-foreground overflow-hidden">
+    <section className="py-16 md:py-28 bg-navy text-primary-foreground overflow-hidden">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -51,12 +51,12 @@ export function WhyChooseSection() {
               <span className="inline-block px-4 py-1.5 bg-gold/20 text-gold text-sm font-medium rounded-full mb-6">
                 Why Choose Us
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 uppercase tracking-wider">
                 Your Success is Our <span className="text-gold">Priority</span>
               </h2>
-              <p className="text-lg text-primary-foreground/70 mb-10 leading-relaxed">
-                P Cube Consulting combines deep industry expertise with a genuine commitment to 
-                candidate and employer success. We don't just fill positions—we build careers 
+              <p className="text-base md:text-lg text-primary-foreground/70 mb-10 leading-relaxed">
+                P Cube Consulting combines deep industry expertise with a genuine commitment to
+                candidate and employer success. We don't just fill positions—we build careers
                 and strengthen guest services teams worldwide.
               </p>
             </motion.div>
@@ -91,22 +91,22 @@ export function WhyChooseSection() {
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={corporateImage} 
-                alt="Professional recruitment team meeting" 
+              <img
+                src={corporateImage}
+                alt="Professional recruitment team meeting"
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent" />
             </div>
             {/* Floating Stats Card */}
-            <div className="absolute -bottom-8 -left-8 bg-card rounded-xl p-6 shadow-xl border border-border">
+            <div className="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-8 bg-card rounded-xl p-4 md:p-6 shadow-xl border border-border">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 bg-gradient-gold rounded-xl flex items-center justify-center">
                   <Award className="w-7 h-7 text-navy" />
                 </div>
                 <div>
-                  <p className="text-3xl font-heading font-bold text-foreground">98%</p>
-                  <p className="text-sm text-muted-foreground">Client Satisfaction</p>
+                  <p className="text-2xl md:text-3xl font-heading font-bold text-foreground">98%</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">Client Satisfaction</p>
                 </div>
               </div>
             </div>

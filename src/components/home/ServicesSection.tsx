@@ -49,21 +49,21 @@ const serviceDetails = [
 
 export function ServicesSection() {
   return (
-    <section className="py-28 md:py-28 bg-white">
+    <section className="py-16 md:py-28 bg-white">
       <div className="container">
         {/* Header */}
         <div className="flex justify-center items-center mb-12 md:mb-16 relative">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">OUR SERVICES</h2>
-          <Link 
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 uppercase tracking-wider">OUR SERVICES</h2>
+          {/* <Link 
             to="/services"
             className="text-blue-600 hover:text-blue-700 font-semibold text-sm md:text-base underline absolute right-0"
           >
             VIEW MORE &gt;
-          </Link>
+          </Link> */}
         </div>
 
         {/* Service Cards with Images */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-4 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-12 px-4 md:px-0">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -73,18 +73,18 @@ export function ServicesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group flex flex-col items-center"
             >
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-lg mb-16">
-                <img 
-                  src={service.image} 
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-lg mb-12 md:mb-16">
+                <img
+                  src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <Link 
+              <Link
                 to={service.link}
-                className="bg-gray-800 hover:bg-gray-900 text-white px-16 py-3 rounded-md font-semibold transition-colors flex flex-col items-center gap-1 shadow-lg -mt-8 relative z-10"
+                className="bg-gray-800 hover:bg-gray-900 text-white px-8 md:px-16 py-3 rounded-md font-semibold transition-colors flex flex-col items-center gap-1 shadow-lg -mt-8 relative z-10 w-full max-w-[200px] md:max-w-none text-center"
               >
-                {service.title} 
+                {service.title}
                 <span className="text-sm">Read More &gt;</span>
               </Link>
             </motion.div>
@@ -100,19 +100,19 @@ export function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-100 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-100 rounded-lg p-6 md:p-8 hover:shadow-lg transition-shadow duration-300"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
                 {detail.title}
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
+              <p className="text-gray-700 text-sm leading-relaxed mb-4 md:mb-6">
                 {detail.description}
               </p>
-              <Link 
+              <Link
                 to={detail.link}
-                className="text-gray-800 hover:text-blue-600 font-semibold text-sm transition-colors"
+                className="text-gray-800 hover:text-blue-600 font-semibold text-sm transition-colors inline-flex items-center"
               >
-                Read More
+                Read More <span className="ml-1">&gt;</span>
               </Link>
             </motion.div>
           ))}

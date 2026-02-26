@@ -62,7 +62,7 @@ const pathwaySteps = [
 
 export function PerfectPathway() {
     return (
-        <section className="py-20 md:py-28 bg-gradient-to-b from-white to-gray-50">
+        <section className="py-12 md:py-28 bg-gradient-to-b from-white to-gray-50">
             <div className="container">
                 {/* Header */}
                 <motion.div
@@ -74,10 +74,10 @@ export function PerfectPathway() {
                     <span className="inline-block px-4 py-1.5 bg-[#148d8d]/10 text-[#148d8d] text-sm font-medium rounded-full mb-4">
                         Your Journey
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#0a192f] mb-4">
+                    <h2 className="text-2xl md:text-4xl font-bold text-[#0a192f] mb-4 uppercase tracking-wide">
                         The Perfect Pathway to Your Dream Job
                     </h2>
-                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                    <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
                         A clear, transparent process from application to deployment - we're with you every step of the way
                     </p>
                 </motion.div>
@@ -101,7 +101,7 @@ export function PerfectPathway() {
                             >
                                 {/* Content Card */}
                                 <div className={index % 2 === 0 ? '' : 'lg:col-start-2'}>
-                                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-[#148d8d]">
+                                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-[#148d8d]">
                                         <div className="flex items-start gap-4">
                                             <div className="flex-shrink-0">
                                                 <div className="w-14 h-14 bg-gradient-to-br from-[#148d8d] to-[#0a192f] rounded-xl flex items-center justify-center">
@@ -110,7 +110,7 @@ export function PerfectPathway() {
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-2">
-                                                    <span className="text-4xl font-bold text-[#148d8d]/20">{item.step}</span>
+                                                    <span className="text-3xl md:text-4xl font-bold text-[#148d8d]/20">{item.step}</span>
                                                     <h3 className="text-xl font-bold text-[#0a192f]">{item.title}</h3>
                                                 </div>
                                                 <p className="text-gray-600 mb-3">{item.description}</p>

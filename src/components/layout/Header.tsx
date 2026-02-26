@@ -138,7 +138,7 @@ export function Header() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="fixed left-0 right-0 top-[115px] w-screen bg-white/95 backdrop-blur-2xl border-t border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-50 overflow-hidden"
+                    className="fixed left-0 right-0 top-[115px] w-full bg-white/95 backdrop-blur-2xl border-t border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-50 overflow-hidden"
                   >
                     <div className="container py-12 grid grid-cols-9 gap-16  justify-items-center items-center">
                       {/* Left: Link Columns (Cols 1-8) */}

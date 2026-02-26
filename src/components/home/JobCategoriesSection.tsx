@@ -58,25 +58,25 @@ export function JobCategoriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl h-80"
+              className="group relative overflow-hidden rounded-2xl h-80 md:h-80"
             >
-              <img 
-                src={category.image} 
+              <img
+                src={category.image}
                 alt={category.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-transparent" />
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
                 <span className="inline-block w-fit px-3 py-1 bg-gold text-navy text-xs font-semibold rounded-full mb-3">
                   {category.positions}
                 </span>
-                <h3 className="text-2xl font-heading font-bold text-primary-foreground mb-2">
+                <h3 className="text-xl md:text-2xl font-heading font-bold text-primary-foreground mb-2">
                   {category.title}
                 </h3>
-                <p className="text-primary-foreground/80 mb-4">
+                <p className="text-sm md:text-base text-primary-foreground/80 mb-4">
                   {category.description}
                 </p>
-                <Link 
+                <Link
                   to={`/jobs#${category.id}`}
                   className="inline-flex items-center text-gold font-medium hover:text-gold-light transition-colors"
                 >

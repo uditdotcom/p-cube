@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Globe, Users, Building2, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/medium-shot-woman-working-as-travel-agent.jpg';
+import heroImage from '@/assets/choosing-matters-meeting.jpg';
 
 
 const stats = [
@@ -14,18 +14,18 @@ const stats = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Lodging professionals in luxury hotel" 
+        <img
+          src={heroImage}
+          alt="Lodging professionals in luxury hotel"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40" />
       </div>
 
-      <div className="container relative z-10 py-20">
+      <div className="container relative z-10 py-12 md:py-20 lg:py-28">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -42,9 +42,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-primary-foreground leading-tight mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-primary-foreground leading-tight mb-6"
           >
-           Reliable Recruitment & Consulting for a{' '}
+            Reliable Recruitment & Consulting for a{' '}
             <span className="text-gradient-gold">Global Workforce</span>
           </motion.h1>
 
@@ -52,10 +52,10 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl leading-relaxed"
           >
-            P Cube Consulting is your trusted partner for overseas and domestic hotel staffing recruitment. 
-            We place exceptional professionals in hotels, resorts, cruise lines, restaurants, and 
+            P Cube Consulting is your trusted partner for overseas and domestic hotel staffing recruitment.
+            We place exceptional professionals in hotels, resorts, cruise lines, restaurants, and
             corporate hotel worldwide.
           </motion.p>
 
@@ -63,7 +63,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16"
+            className="flex flex-col sm:flex-row gap-4 mb-12 md:mb-16"
           >
             <Button asChild size="lg" className="bg-gradient-gold hover:opacity-90 text-navy font-semibold shadow-gold text-lg px-8">
               <Link to="/apply">
@@ -87,16 +87,16 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
         >
           {stats.map((stat, index) => (
-            <div 
+            <div
               key={stat.label}
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/10"
+              className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-primary-foreground/10"
             >
-              <stat.icon className="w-8 h-8 text-gold mb-3" />
-              <p className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground">{stat.value}</p>
-              <p className="text-primary-foreground/70 text-sm">{stat.label}</p>
+              <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-gold mb-3" />
+              <p className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-primary-foreground">{stat.value}</p>
+              <p className="text-primary-foreground/70 text-xs md:text-sm">{stat.label}</p>
             </div>
           ))}
         </motion.div>

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Globe, Home, Users, FileCheck, GraduationCap, Building2, 
+import {
+  Globe, Home, Users, FileCheck, GraduationCap, Building2,
   ArrowRight, CheckCircle2, Plane, FileText, Award, Briefcase
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
@@ -139,13 +139,13 @@ const Services = () => {
             className="max-w-3xl"
           >
             <span className="inline-block px-4 py-1.5 bg-gold/20 text-gold text-sm font-medium rounded-full mb-6">
-              Our Services
+              Our Service
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground mb-6">
               Comprehensive Hotel staffing <span className="text-gold">Recruitment Solutions</span>
             </h1>
             <p className="text-xl text-primary-foreground/70 leading-relaxed">
-              From overseas placements to domestic staffing, visa support to training programs, 
+              From overseas placements to domestic staffing, visa support to training programs,
               we offer end-to-end solutions tailored to the hotel industry.
             </p>
           </motion.div>
@@ -164,9 +164,8 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                }`}
+                className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''
+                  }`}
               >
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
                   <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mb-6`}>
@@ -254,7 +253,7 @@ const Services = () => {
               Ready to Get Started?
             </h2>
             <p className="text-lg text-primary-foreground/70 mb-8">
-              Whether you're seeking your next career move or looking to hire exceptional talent, 
+              Whether you're seeking your next career move or looking to hire exceptional talent,
               our team is ready to assist you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

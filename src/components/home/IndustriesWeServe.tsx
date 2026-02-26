@@ -68,7 +68,7 @@ export function IndustriesWeServe() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4, delay: index * 0.1 }}
-                            className="group relative h-80 rounded-2xl overflow-hidden shadow-lg bg-gray-200"
+                            className="group relative h-72 md:h-80 rounded-2xl overflow-hidden shadow-lg bg-gray-200"
                         >
                             {/* 1. THE IMAGE: Ensure 'w-full h-full' and 'object-cover' are present */}
                             <img
@@ -81,12 +81,12 @@ export function IndustriesWeServe() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:via-black/40 transition-all duration-300" />
 
                             {/* 3. THE CONTENT */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-end p-8">
+                            <div className="absolute inset-0 flex flex-col items-center justify-end p-4 md:p-8">
                                 <Link
                                     to={industry.link}
                                     className="flex flex-col items-center justify-center w-full p-6 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 rounded-xl transition-all duration-300 group/btn"
                                 >
-                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                                    <h3 className="text-lg md:text-2xl font-bold text-white mb-1">
                                         {industry.name}
                                     </h3>
 
